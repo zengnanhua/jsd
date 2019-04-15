@@ -1,4 +1,5 @@
 ﻿using AdminSystem.Application.Queries;
+using AdminSystem.Domain.AggregatesModel.AttributeConfigAggregate;
 using AdminSystem.Domain.AggregatesModel.UserAggregate;
 using AdminSystem.Infrastructure.Repositories;
 using Autofac;
@@ -29,6 +30,9 @@ namespace AdminSystem.Api.Infrastructure.AutofacModules
             builder.RegisterType<ApplicationUserRepository>()
                .As<IApplicationUserRepository>()
                .InstancePerLifetimeScope();
+            builder.RegisterType<AttributeConfigRepository>()
+              .As<IAttributeConfigRepository>()
+              .InstancePerLifetimeScope();
         }
     }
 }

@@ -8,6 +8,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using AdminSystem.Domain.AggregatesModel.AttributeConfigAggregate;
+using MediatR;
+using AdminSystem.Application.Commands;
 
 namespace AdminSystem.Api.Infrastructure
 {
@@ -16,26 +19,21 @@ namespace AdminSystem.Api.Infrastructure
         public async Task SeedAsync(ApplicationDbContext context, IHostingEnvironment env, IServiceProvider service)
         {
             var logger= service.GetService<ILogger<ApplicationDbContextSeed>>();
-            
+            var mediator = service.GetService<IMediator>();
             if (!context.ApplicationUsers.Any())
             {
-
-
                 #region 初始数据时同步Rms用户数据
                 logger.LogInformation("#########初始数据时同步Rms用户数据开始################");
-                var zmd_ac_usersQuery= service.GetService<IRmsDataBaseQuery>();
-                var list = await zmd_ac_usersQuery.GetZmd_Ac_UsersAsync();
-                if (list != null && list.Count > 0)
-                {
-                    foreach (var temp in list)
-                    {
-                        ApplicationUser user = new ApplicationUser(temp.UserId,temp.TrueName,temp.Phone,temp.DeptCode);
-                        context.ApplicationUsers.Add(user);
-                    }
-                }
+                await mediator.Send(new SynchronizeUserCommand());
                 logger.LogInformation("#########初始数据时同步Rms用户数据结束################");
                 #endregion
-                await context.SaveChangesAsync();
+            }
+            if (!context.AttributeConfigs.Any())
+            {
+                logger.LogInformation("#########初始数据时同步Config配置数据开始################");
+              
+                await mediator.Send(new SynchronizeAttributeConfigCommand());
+                logger.LogInformation("#########初始数据时同步Config配置数据结束################");
             }
         }
     }

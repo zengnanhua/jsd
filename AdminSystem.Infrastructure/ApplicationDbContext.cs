@@ -1,4 +1,5 @@
-﻿using AdminSystem.Domain.AggregatesModel.UserAggregate;
+﻿using AdminSystem.Domain.AggregatesModel.AttributeConfigAggregate;
+using AdminSystem.Domain.AggregatesModel.UserAggregate;
 using AdminSystem.Domain.SeedWork;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace AdminSystem.Infrastructure
     public class ApplicationDbContext: DbContext, IUnitOfWork
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
+        public DbSet<AttributeConfig> AttributeConfigs { get; set; }
 
         private readonly IMediator _mediator;
 

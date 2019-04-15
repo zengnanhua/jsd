@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Linq;
 using Microsoft.Extensions.Caching.Memory;
+using AdminSystem.Domain.AggregatesModel.AttributeConfigAggregate;
 
 namespace AdminSystem.Application.Queries
 {
@@ -14,11 +15,13 @@ namespace AdminSystem.Application.Queries
     {
         private IConfiguration _configuration;
         private IMemoryCache _memoryCache;
+        private IAttributeConfigRepository _attributeConfigRepository;
         string oracleConnection = string.Empty;
-        public RmsDataBaseQuery(IConfiguration configuration, IMemoryCache memoryCache)
+        public RmsDataBaseQuery(IConfiguration configuration, IMemoryCache memoryCache, IAttributeConfigRepository attributeConfigRepository)
         {
             this._configuration = configuration;
             this._memoryCache = memoryCache;
+            this._attributeConfigRepository = attributeConfigRepository;
             oracleConnection = _configuration.GetConnectionString("ZmdOracle");
         }
         /// <summary>
@@ -57,9 +60,9 @@ namespace AdminSystem.Application.Queries
         {
             
            //从缓存zhogn
-           var resultList= _memoryCache.GetOrCreate<List<Zmd_Base_ConfigTab>>("zmd_base_config_cache", c =>
+           var resultList= _memoryCache.GetOrCreate<List<AttributeConfig>>("AttributeConfigCache", c =>
             {
-                var list =  GetZmd_Base_Config();
+                var list =  _attributeConfigRepository.GetAttributeConfigList();
                 return list;
             });
 
@@ -73,7 +76,7 @@ namespace AdminSystem.Application.Queries
                 
             }
 
-            throw new Exception("Zmd_Base_ConfigTab中没有配置key");
+            throw new Exception("AttributeConfigCache中没有同步key");
         }
 
     }

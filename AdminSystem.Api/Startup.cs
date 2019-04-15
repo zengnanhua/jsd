@@ -110,8 +110,10 @@ namespace AdminSystem.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
             app.UseHangfireServer();//启动Hangfire服务
             app.UseHangfireDashboard();//启动hangfire面板
+
 
             app.UseAuthentication();
 
