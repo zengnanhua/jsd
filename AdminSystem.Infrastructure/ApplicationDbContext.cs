@@ -1,4 +1,5 @@
 ﻿using AdminSystem.Domain.AggregatesModel.AttributeConfigAggregate;
+using AdminSystem.Domain.AggregatesModel.JsdOrderAggregate;
 using AdminSystem.Domain.AggregatesModel.UserAggregate;
 using AdminSystem.Domain.SeedWork;
 using MediatR;
@@ -18,6 +19,8 @@ namespace AdminSystem.Infrastructure
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<AttributeConfig> AttributeConfigs { get; set; }
+        public DbSet<JsdOrder> JsdOrders { get; set; }
+        public DbSet<JsdOrderItem> JsdOrderItems { get; set; }
 
         private readonly IMediator _mediator;
 

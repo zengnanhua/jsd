@@ -79,5 +79,28 @@ namespace AdminSystem.Application.Queries
             throw new Exception("AttributeConfigCache中没有同步key");
         }
 
+
+        public async Task<List<zmd_oms_head>> GetZmd_oms_headAsync(string oprdate)
+        {
+            try
+            {
+                string sql = "  select a.OrderCode,a.DeptCode,a.OprDate,a.Status from  zmd_oms_header a where a.oprdate=:vOprDate";
+                DynamicParameters param = new DynamicParameters();
+                param.Add(":vOprDate", oprdate);
+                using (OracleConnection conn = new OracleConnection(oracleConnection))
+                {
+                    var list = (conn.Query<zmd_oms_head>(sql, param)).ToList();
+                    if (list == null)
+                    {
+                        list = new List<zmd_oms_head>();
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<zmd_oms_head>();
+            }
+        }
     }
 }

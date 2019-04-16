@@ -14,6 +14,7 @@ namespace AdminSystem.Api.Controllers
 {
     //[Produces("application/json")]
     [Route("api/[controller]/[action]")]
+    [ApiController]
     public class HomeController : Controller
     {
         IMediator _mediator;
@@ -51,7 +52,16 @@ namespace AdminSystem.Api.Controllers
             var a = _mediator.Send(new SynchronizeAttributeConfigCommand()).Result;
             return ResultData<string>.CreateResultDataSuccess("成功");
         }
-
+        /// <summary>
+        /// 同步极速达订单
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ResultData<string> SynchronizeJsdOrder()
+        {
+            var a = _mediator.Send(new SynchronizeJsdOrderCommand("2019-04-16")).Result;
+            return ResultData<string>.CreateResultDataSuccess("成功");
+        }
 
         [HttpPost]
         public async Task<bool> CreateUser()

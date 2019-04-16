@@ -25,5 +25,17 @@ namespace AdminSystem.Application.Queries
             }
             
         }
+        /// <summary>
+        /// 获取极速达订单状态
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<GetJsdOrderOutput>> GetJsdOrderListAsync(string oprDate)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                var result = (await connection.QueryAsync<GetJsdOrderOutput>("select  * from jsdorders a where a.OprDate=@oprDate",new { oprDate })).ToList();
+                return result;
+            }
+        }
     }
 }

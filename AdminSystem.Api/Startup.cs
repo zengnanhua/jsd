@@ -48,7 +48,10 @@ namespace AdminSystem.Api
               .AddCustomSwagger(Configuration)
               .AddCustomDbContext(Configuration)
               .AddAuthorization()
-              .AddMvc()
+              .AddMvc(options =>
+              {
+                  options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+              })
               .AddControllersAsServices();
 
 

@@ -10,5 +10,6 @@ namespace AdminSystem.Application.Queries
         Task<List<zmd_ac_usersTab>> GetZmd_Ac_UsersAsync();
         Task<string> GetZmd_Base_ConfigyValueByKeyCacheAsync(string key);
         Task<List<Zmd_Base_ConfigTab>> GetZmd_Base_ConfigAsync();
+        Task<List<zmd_oms_head>> GetZmd_oms_headAsync(string oprdate);
     }
 }
