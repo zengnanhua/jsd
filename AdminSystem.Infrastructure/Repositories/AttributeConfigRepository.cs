@@ -35,7 +35,7 @@ namespace AdminSystem.Infrastructure.Repositories
         }
         public async Task<bool> AttributeConfigDeleteAllAsync()
         {
-            var list= _context.AttributeConfigs.ToList();
+            var list= await _context.AttributeConfigs.ToListAsync();
             if (list != null && list.Count > 0)
             {
                 foreach (var temp in list)

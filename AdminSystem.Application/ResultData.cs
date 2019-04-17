@@ -53,7 +53,7 @@ namespace AdminSystem.Application
         /// <param name="message">错误描述</param>
         /// <param name="datas">数据</param>
         /// <returns></returns>
-        public static ResultData<T> CreateResultData<T>(ResultCode.ResultCodeType code, string message = "", T datas = default(T), object _extend = null)
+        public static ResultData<T> CreateResultData(ResultCode.ResultCodeType code, string message = "", T datas = default(T), object _extend = null)
         {
             string codeStr = ((int)code).ToString();
 
@@ -121,7 +121,7 @@ namespace AdminSystem.Application
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T GetDataValue<T>()
+        public T GetDataValue()
         {
             if (data != null)
             {

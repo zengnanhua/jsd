@@ -12,7 +12,7 @@ namespace AdminSystem.Application.DomainEventHandlers
     {
         public async Task Handle(CreateUserChangeRoleDomainEvent notification, CancellationToken cancellationToken)
         {
-            int i = 0;
+           
         }
     }
 }

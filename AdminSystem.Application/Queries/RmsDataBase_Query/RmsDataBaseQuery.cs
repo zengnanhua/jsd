@@ -89,7 +89,7 @@ namespace AdminSystem.Application.Queries
                 param.Add(":vOprDate", oprdate);
                 using (OracleConnection conn = new OracleConnection(oracleConnection))
                 {
-                    var list = (conn.Query<zmd_oms_head>(sql, param)).ToList();
+                    var list = (await conn.QueryAsync<zmd_oms_head>(sql, param)).ToList();
                     if (list == null)
                     {
                         list = new List<zmd_oms_head>();

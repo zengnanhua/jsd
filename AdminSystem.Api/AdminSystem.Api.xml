@@ -4,6 +4,61 @@
         <name>AdminSystem.Api</name>
     </assembly>
     <members>
+        <member name="M:AdminSystem.Api.Controllers.AccountController.Login(AdminSystem.Application.Commands.LoginCommand)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminSystem.Api.Controllers.AccountController.SendValidateCode(AdminSystem.Application.Commands.SendValidateCodeCommand)">
+            <summary>
+            发送验证码
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminSystem.Api.Controllers.HomeController.SynchronizeUser">
+            <summary>
+            同步用户数据
+            </summary>
+        </member>
+        <member name="M:AdminSystem.Api.Controllers.HomeController.SynchronizeConfig">
+            <summary>
+            同步配置数据
+            </summary>
+        </member>
+        <member name="M:AdminSystem.Api.Controllers.HomeController.PrivateSynchronizeJsdOrder">
+            <summary>
+            这个提供给hangfire调用
+            </summary>
+        </member>
+        <member name="M:AdminSystem.Api.Controllers.HomeController.SynchronizeJsdOrder(AdminSystem.Application.Commands.SynchronizeJsdOrderCommand)">
+            <summary>
+            同步极速达订单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdminSystem.Api.Controllers.JsdOrderController.GetJsdOrderListPage(AdminSystem.Application.Queries.GetJsdOrderListPageAsyncDtoInput)">
+            <summary>
+            获取订单列表
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminSystem.Api.Controllers.JsdOrderController.SignReceiveOrder(AdminSystem.Application.Commands.SignReceiveOrderCommand)">
+            <summary>
+            签收订单
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminSystem.Api.Controllers.JsdOrderController.CancelReceiveOrder(AdminSystem.Application.Commands.CancelReceiveOrderCommand)">
+            <summary>
+            取消订单
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AdminSystem.Api.Infrastructure.Filters.AuthorizeCheckOperationFilter">
             <summary>
             swagger 文档过滤
@@ -15,12 +70,6 @@
             </summary>
             <param name="services"></param>
             <param name="configuration"></param>
-            <returns></returns>
-        </member>
-        <member name="M:UserIdentity.Controllers.ValuesController.Get">
-            <summary>
-            获取用户 测试
-            </summary>
             <returns></returns>
         </member>
     </members>

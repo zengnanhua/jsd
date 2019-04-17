@@ -123,7 +123,13 @@ namespace AdminSystem.Api
 
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseMvc(routes=> {
+                routes.MapRoute(
+                    name: "Default",
+                    template: "api/{controller}/{action}",
+                    defaults: new { controller = "Home", action = "Index" }
+                );
+            });
 
             app.UseSwagger()
                .UseSwaggerUI(c =>
