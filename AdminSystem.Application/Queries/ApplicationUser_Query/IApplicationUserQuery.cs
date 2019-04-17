@@ -13,5 +13,7 @@ namespace AdminSystem.Application.Queries
         /// </summary>
         /// <returns></returns>
         Task<List<GetJsdOrderOutput>> GetJsdOrderListAsync(string oprDate);
+
+        Task<ResultData<List<GetJsdOrderListPageAsyncDtoResult>>> GetJsdOrderListPageAsync(GetJsdOrderListPageAsyncDtoInput param);
     }
 }

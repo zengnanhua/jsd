@@ -48,7 +48,7 @@ namespace AdminSystem.Domain.AggregatesModel.JsdOrderAggregate
             this.JsdOrderId = jsdOrderId;
             this.OrderCode = orderCode;
             this.ProductCode = productCode;
-            this.ProductName = ProductName;
+            this.ProductName = productName;
             this.Qty = qty;
             this.Price = price;
             this.Category = category;

@@ -29,7 +29,7 @@ namespace AdminSystem.Application.Commands
         public async Task<bool> Handle(SynchronizeJsdOrderCommand request, CancellationToken cancellationToken)
         {
             DateTime date;
-            if (!DateTime.TryParse(request.Date, out date))
+            if (string.IsNullOrEmpty(request.Date)||(!DateTime.TryParse(request.Date, out date)))
             {
                 throw new Exception($"字段 date 值：‘{request.Date}’不是 yyyy-MM-dd格式");
             }

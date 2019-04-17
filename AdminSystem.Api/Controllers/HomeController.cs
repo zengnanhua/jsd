@@ -30,6 +30,8 @@ namespace AdminSystem.Api.Controllers
              RecurringJob.AddOrUpdate("同步用户信息", () =>this.SynchronizeUser(), "0 1 * * *", TimeZoneInfo.Local);
             //同步配置数据
             RecurringJob.AddOrUpdate("同步配置信息", () => this.SynchronizeConfig(), "15 1 * * *", TimeZoneInfo.Local);
+            //同步极速达订单信息
+            RecurringJob.AddOrUpdate("同步极速达订单信息", () => this.PrivateSynchronizeJsdOrder(), "30 1 * * *", TimeZoneInfo.Local);
 
             return new RedirectResult("~/homeIndex.html");
         }
@@ -53,13 +55,21 @@ namespace AdminSystem.Api.Controllers
             return ResultData<string>.CreateResultDataSuccess("成功");
         }
         /// <summary>
+        /// 这个提供给hangfire调用
+        /// </summary>
+        [NonAction]
+        public void PrivateSynchronizeJsdOrder()
+        {
+            this.SynchronizeJsdOrder(new SynchronizeJsdOrderCommand(DateTime.Now.ToString("yyyy-MM-dd")));
+        }
+        /// <summary>
         /// 同步极速达订单
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ResultData<string> SynchronizeJsdOrder()
+        public ResultData<string> SynchronizeJsdOrder(SynchronizeJsdOrderCommand param)
         {
-            var a = _mediator.Send(new SynchronizeJsdOrderCommand("2019-04-16")).Result;
+            var a = _mediator.Send(param).Result;
             return ResultData<string>.CreateResultDataSuccess("成功");
         }
 

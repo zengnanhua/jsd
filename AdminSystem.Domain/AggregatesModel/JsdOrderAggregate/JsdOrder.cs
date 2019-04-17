@@ -68,6 +68,7 @@ namespace AdminSystem.Domain.AggregatesModel.JsdOrderAggregate
         /// 订单金额
         /// </summary>
         public string Amount { get; private set; }
+        public string Imeis { get; set; }
         /// <summary>
         /// 是否是本系统更改了
         /// </summary>
@@ -103,6 +104,36 @@ namespace AdminSystem.Domain.AggregatesModel.JsdOrderAggregate
         public void SetStatus(string status)
         {
             this.Status = status;
+        }
+        /// <summary>
+        /// 签收订单
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <param name="deliveryUserId"></param>
+        /// <param name="deliveryUserName"></param>
+        /// <param name="imeis"></param>
+        public void SignReceive(string mobile,string deliveryUserId,string deliveryUserName,string imeis)
+        {
+            this.CreateOrderMobile = mobile;
+            this.DeliveryUserId = deliveryUserId;
+            this.DeliveryUserName = deliveryUserName;
+            this.Imeis = imeis;
+            this.Status = "3";
+        }
+        /// <summary>
+        /// 取消订单
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <param name="cancelUserId"></param>
+        /// <param name="cancelTureName"></param>
+        /// <param name="remark"></param>
+        public void CancelReceive(string mobile, string cancelUserId , string cancelTureName,string remark )
+        {
+            this.Mobile = mobile;
+            this.CancelUserId = cancelUserId;
+            this.CancelTureName = cancelTureName;
+            this.Remark = remark;
+            this.Status = "2";
         }
 
         public void AddJsdOrderItem(string orderCode, string productCode, string productName, string qty

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AdminSystem.Domain.AggregatesModel.UserAggregate;
+using MediatR;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,11 @@ namespace AdminSystem.Application.Commands
 {
     public class LoginCommandHandler : IRequestHandler<LoginCommand, ResultData<string>>
     {
+        private IApplicationUserRepository _applicationUserRepository { get; set; }
+        public LoginCommandHandler(IApplicationUserRepository applicationUserRepository)
+        {
+            this._applicationUserRepository = applicationUserRepository;
+        }
         public async Task<ResultData<string>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             if (!(request.Mobile == "nanhua" && request.ValidateCode == "123"))
@@ -21,7 +27,7 @@ namespace AdminSystem.Application.Commands
 
             var claim = new Claim[]
             {
-                    new Claim("Mobile",request.Mobile),
+                  new Claim("Mobile",request.Mobile),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Hello-key-----wyt"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
