@@ -31,7 +31,7 @@ namespace AdminSystem.Api.Controllers
             //同步配置数据
             RecurringJob.AddOrUpdate("同步配置信息", () => this.SynchronizeConfig(), "15 1 * * *", TimeZoneInfo.Local);
             //同步极速达订单信息
-            RecurringJob.AddOrUpdate("同步极速达订单信息", () => this.PrivateSynchronizeJsdOrder(), "30 1 * * *", TimeZoneInfo.Local);
+            RecurringJob.AddOrUpdate("同步极速达订单信息", () => this.PrivateSynchronizeJsdOrder(), "*/10 * * * *", TimeZoneInfo.Local);
 
             return new RedirectResult("~/homeIndex.html");
         }

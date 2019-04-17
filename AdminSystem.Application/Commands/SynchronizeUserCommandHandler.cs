@@ -28,6 +28,7 @@ namespace AdminSystem.Application.Commands
             if (list != null && list.Count > 0)
             {
                 await _iApplicationUserRepository.UserDeleteAllAsync();
+
                 foreach (var temp in list)
                 {
                     ApplicationUser user = new ApplicationUser(temp.UserId, temp.TrueName, temp.Phone, temp.DeptCode);

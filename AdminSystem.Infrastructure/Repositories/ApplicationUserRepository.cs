@@ -1,16 +1,19 @@
 ﻿using AdminSystem.Domain.AggregatesModel.UserAggregate;
 using AdminSystem.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dapper;
 namespace AdminSystem.Infrastructure.Repositories
 {
     public class ApplicationUserRepository : IApplicationUserRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
         public IUnitOfWork UnitOfWork
         {
             get
@@ -19,9 +22,10 @@ namespace AdminSystem.Infrastructure.Repositories
             }
         }
 
-        public ApplicationUserRepository(ApplicationDbContext context)
+        public ApplicationUserRepository(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _configuration = configuration;
         }
         public bool AddUser(ApplicationUser user)
         {
@@ -42,14 +46,19 @@ namespace AdminSystem.Infrastructure.Repositories
 
         public async Task<bool> UserDeleteAllAsync()
         {
-            var list =await _context.ApplicationUsers.ToListAsync();
-            if (list != null && list.Count > 0)
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("MysqlConnection")))
             {
-                foreach (var temp in list)
-                {
-                    _context.ApplicationUsers.Remove(temp);
-                }
+                //truncate applicationusers
+                await connection.ExecuteAsync("delete from applicationusers");
             }
+            //var list =await _context.ApplicationUsers.ToListAsync();
+            //if (list != null && list.Count > 0)
+            //{
+            //    foreach (var temp in list)
+            //    {
+            //        _context.ApplicationUsers.Remove(temp);
+            //    }
+            //}
             return true;
         }
     }

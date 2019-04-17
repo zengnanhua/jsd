@@ -35,6 +35,8 @@ namespace AdminSystem.Application.Commands
                 }
 
             }
+            //n
+            _iRmsDataBaseQuery.RefreshAttributeConfig();
             return await _attributeConfigRepository.UnitOfWork.SaveEntitiesAsync();
         }
     }

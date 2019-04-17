@@ -1,6 +1,9 @@
 ﻿using AdminSystem.Domain.AggregatesModel.AttributeConfigAggregate;
 using AdminSystem.Domain.SeedWork;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +15,7 @@ namespace AdminSystem.Infrastructure.Repositories
     public class AttributeConfigRepository : IAttributeConfigRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
         public IUnitOfWork UnitOfWork
         {
             get
@@ -20,9 +24,10 @@ namespace AdminSystem.Infrastructure.Repositories
             }
         }
 
-        public AttributeConfigRepository(ApplicationDbContext context)
+        public AttributeConfigRepository(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            this._configuration = configuration;
         }
         public async Task<bool> AttributeConfigAddAsync(AttributeConfig config)
         {
@@ -35,14 +40,18 @@ namespace AdminSystem.Infrastructure.Repositories
         }
         public async Task<bool> AttributeConfigDeleteAllAsync()
         {
-            var list= await _context.AttributeConfigs.ToListAsync();
-            if (list != null && list.Count > 0)
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("MysqlConnection")))
             {
-                foreach (var temp in list)
-                {
-                    _context.AttributeConfigs.Remove(temp);
-                }
+                await connection.ExecuteAsync("delete from attributeconfigs");
             }
+            //var list= await _context.AttributeConfigs.ToListAsync();
+            //if (list != null && list.Count > 0)
+            //{
+            //    foreach (var temp in list)
+            //    {
+            //        _context.AttributeConfigs.Remove(temp);
+            //    }
+            //}
             return true;
         }
 

@@ -56,6 +56,13 @@ namespace AdminSystem.Application.Queries
                 return list;
             }
         }
+        /// <summary>
+        /// 刷新属性缓存
+        /// </summary>
+        public void RefreshAttributeConfig()
+        {
+            _memoryCache.Remove("AttributeConfigCache");
+        }
         public async Task<string> GetZmd_Base_ConfigyValueByKeyCacheAsync(string key)
         {
             
