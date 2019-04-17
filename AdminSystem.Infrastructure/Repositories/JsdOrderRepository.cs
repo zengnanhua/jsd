@@ -1,7 +1,9 @@
 ﻿using AdminSystem.Domain.AggregatesModel.JsdOrderAggregate;
 using AdminSystem.Domain.SeedWork;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,6 +32,16 @@ namespace AdminSystem.Infrastructure.Repositories
         public async Task<JsdOrder> GetAsync(int jsdOrderId)
         {
             var order = await _context.JsdOrders.FindAsync(jsdOrderId);
+            if (order != null)
+            {
+                await _context.Entry(order)
+                  .Collection(i => i.OrderItem).LoadAsync();
+            }
+            return order;
+        }
+        public async Task<JsdOrder> GetJsdByJsdOrderCodeAsync(string orderCode)
+        {
+            var order = await _context.JsdOrders.FirstOrDefaultAsync(c=>c.OrderCode== orderCode);
             if (order != null)
             {
                 await _context.Entry(order)

@@ -119,6 +119,7 @@ namespace AdminSystem.Domain.AggregatesModel.JsdOrderAggregate
             this.DeliveryUserName = deliveryUserName;
             this.Imeis = imeis;
             this.Status = "3";
+            this.SetIsThisSystemChange(true);
         }
         /// <summary>
         /// 取消订单
@@ -129,11 +130,12 @@ namespace AdminSystem.Domain.AggregatesModel.JsdOrderAggregate
         /// <param name="remark"></param>
         public void CancelReceive(string mobile, string cancelUserId , string cancelTureName,string remark )
         {
-            this.Mobile = mobile;
+            this.CreateOrderMobile = mobile;
             this.CancelUserId = cancelUserId;
             this.CancelTureName = cancelTureName;
             this.Remark = remark;
             this.Status = "2";
+            this.SetIsThisSystemChange(true);
         }
 
         public void AddJsdOrderItem(string orderCode, string productCode, string productName, string qty

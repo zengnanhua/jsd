@@ -10,6 +10,7 @@ namespace AdminSystem.Domain.AggregatesModel.JsdOrderAggregate
     {
         Task<JsdOrder> AddJsdOrderAsync(JsdOrder order);
         Task<JsdOrder> GetAsync(int jsdOrderId);
+        Task<JsdOrder> GetJsdByJsdOrderCodeAsync(string orderCode);
         void Update(JsdOrder order);
     }
 }

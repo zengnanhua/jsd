@@ -32,5 +32,15 @@ namespace AdminSystem.Api.Controllers
         {
             return await _mediator.Send(param);
         }
+        /// <summary>
+        /// 发送验证码
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ResultData<string>> SendValidateCode(SendValidateCodeCommand param)
+        {
+            return await _mediator.Send(param);
+        }
     }
 }

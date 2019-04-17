@@ -1,7 +1,6 @@
 ﻿using AdminSystem.Application.Services;
 using AdminSystem.Domain.AggregatesModel.JsdOrderAggregate;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,19 +9,20 @@ using System.Threading.Tasks;
 
 namespace AdminSystem.Application.Commands
 {
-    public class SignReceiveOrderCommandHandler : IRequestHandler<SignReceiveOrderCommand, ResultData<string>>
+    public class CancelReceiveOrderCommandHandler : IRequestHandler<CancelReceiveOrderCommand, ResultData<string>>
     {
         private IIdentityService _identityService;
         private IJsdOrderRepository _jsdOrderRepository;
         private HttpOmsService _httpOmsService;
-        public SignReceiveOrderCommandHandler(IIdentityService identityService, IJsdOrderRepository jsdOrderRepository, HttpOmsService httpOmsService)
+
+        public CancelReceiveOrderCommandHandler(IIdentityService identityService, IJsdOrderRepository jsdOrderRepository, HttpOmsService httpOmsService)
         {
             this._identityService = identityService;
             this._jsdOrderRepository = jsdOrderRepository;
             this._httpOmsService = httpOmsService;
-
         }
-        public async Task<ResultData<string>> Handle(SignReceiveOrderCommand request, CancellationToken cancellationToken)
+
+        public async Task<ResultData<string>> Handle(CancelReceiveOrderCommand request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(request.JsdOrderCode))
             {
@@ -38,7 +38,7 @@ namespace AdminSystem.Application.Commands
             }
 
             var jsdOrder = await _jsdOrderRepository.GetJsdByJsdOrderCodeAsync(request.JsdOrderCode);
-            if (jsdOrder==null)
+            if (jsdOrder == null)
             {
                 return ResultData<string>.CreateResultDataFail("该订单未找到");
             }
@@ -54,10 +54,10 @@ namespace AdminSystem.Application.Commands
                 return queryResult;
             }
 
-            jsdOrder.SignReceive(request.Mobile,_identityService.GetUserId(),_identityService.GetTrueName(),request.Imeis);
+            jsdOrder.CancelReceive(request.Mobile, _identityService.GetUserId(), _identityService.GetTrueName(), request.Remark);
 
             //调用签收接口
-            var checkResult= await _httpOmsService.CheckReceiveCodeAsync(new Models.HttpCheckReceiveCodeParameter() { serial = jsdOrder.OrderCode, receiveCode = request.ReceiveCode, status = "1" });
+            var checkResult = await _httpOmsService.CheckReceiveCodeAsync(new Models.HttpCheckReceiveCodeParameter() { serial = jsdOrder.OrderCode, receiveCode = request.ReceiveCode, status = "2" });
             if (!checkResult.IsSuccess())
             {
                 return checkResult;

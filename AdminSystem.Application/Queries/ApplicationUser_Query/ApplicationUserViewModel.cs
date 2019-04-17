@@ -35,6 +35,7 @@ namespace AdminSystem.Application.Queries
     {
         public string Page { get; set; }
         public string PageSize { get; set; }
+        public string Mobile { get; set; }
     }
 
     public class JsdOrderDto

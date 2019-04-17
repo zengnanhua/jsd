@@ -10,5 +10,6 @@ namespace AdminSystem.Domain.AggregatesModel.UserAggregate
     {
         bool AddUser(ApplicationUser user);
         Task<bool> UserDeleteAllAsync();
+        Task<ApplicationUser> GetUserByMobileAsync(string mobile);
     }
 }

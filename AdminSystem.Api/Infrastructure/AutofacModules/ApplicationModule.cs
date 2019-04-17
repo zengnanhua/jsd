@@ -39,6 +39,7 @@ namespace AdminSystem.Api.Infrastructure.AutofacModules
              .As<IJsdOrderRepository>()
              .InstancePerLifetimeScope();
 
+
             builder.RegisterType<HttpOmsService>();
         }
     }

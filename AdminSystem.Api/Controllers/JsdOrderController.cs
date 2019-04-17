@@ -35,14 +35,23 @@ namespace AdminSystem.Api.Controllers
             return await _applicationUserQuery.GetJsdOrderListPageAsync(param);
         }
         /// <summary>
-        /// 签收订单列表
+        /// 签收订单
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task SignReceiveOrder(SignReceiveOrderCommand param)
+        public async Task<ResultData<string>> SignReceiveOrder(SignReceiveOrderCommand param)
         {
-            
+            return await _mediator.Send(param);
+        }
+        /// <summary>
+        /// 取消订单
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ResultData<string>> CancelReceiveOrder(CancelReceiveOrderCommand param)
+        {
+            return await _mediator.Send(param);
         }
     }
 }

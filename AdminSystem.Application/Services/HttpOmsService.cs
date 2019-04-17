@@ -54,5 +54,43 @@ namespace AdminSystem.Application.Services
             var result = JsonConvert.DeserializeObject<HttpGetJsdOrderPayedDetailResult>(returnStr);
             return result;
         }
+
+        /// <summary>
+        /// 签收码查询(极速达)
+        /// 曾南华 20190326
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ResultData<string>> QueryReceiveCodeAsync(HttpQueryReceiveCodeParameter param)
+        {
+            var str = JsonConvert.SerializeObject(param);
+
+            var returnStr = await WebAPIHelper.HttpPostAsync(OMSUrl + "/orders/web/trade/queryReceiveCode", str);
+            var result = JsonConvert.DeserializeObject<HttpReceiveResult>(returnStr);
+            if (result.Code == "0")
+            {
+                return ResultData<string>.CreateResultDataSuccess("成功");
+            }
+
+            return ResultData<string>.CreateResultDataFail(result.Msg);
+        }
+        /// <summary>
+        /// 签收核销码(极速达)
+        /// 曾南华 20190326
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ResultData<string>> CheckReceiveCodeAsync(HttpCheckReceiveCodeParameter param)
+        {
+            var str = JsonConvert.SerializeObject(param);
+
+            var returnStr = await WebAPIHelper.HttpPostAsync(OMSUrl + "/orders/web/trade/checkReceiveCode", str);
+            var result = JsonConvert.DeserializeObject<HttpReceiveResult>(returnStr);
+            if (result.Code == "0")
+            {
+                return ResultData<string>.CreateResultDataSuccess("成功");
+            }
+
+            return ResultData<string>.CreateResultDataFail(result.Msg);
+
+        }
     } 
 }

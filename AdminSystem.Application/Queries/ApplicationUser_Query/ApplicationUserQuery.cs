@@ -43,11 +43,16 @@ namespace AdminSystem.Application.Queries
         {
             int page = !string.IsNullOrEmpty(param.Page) ? Convert.ToInt32(param.Page) : 1;
             int pageSize= !string.IsNullOrEmpty(param.PageSize) ? Convert.ToInt32(param.PageSize) : 10;
+            var whereStr = "";
+            if (!string.IsNullOrWhiteSpace(param.Mobile))
+            {
+                whereStr = $"and z.Mobile = '{param.Mobile}'";
+            }
             string sql = $@"select b.*,a.* from jsdorders a inner join jsdorderitems b
                             on a.Id=b.JsdOrderId 
                             where EXISTS(
                              SELECT id from(
-		                            select z.id from jsdorders z  order by z.oprdate desc  limit {(page-1)*pageSize},{pageSize}
+		                            select z.id from jsdorders z where 1=1 { whereStr }  order by z.oprdate desc  limit {(page-1)*pageSize},{pageSize}
 	                            ) zz  where zz.id =a.Id
                             )";
             using (var connection = new MySqlConnection(_connectionString))

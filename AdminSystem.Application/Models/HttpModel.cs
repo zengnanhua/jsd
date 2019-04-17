@@ -46,5 +46,27 @@ namespace AdminSystem.Application.Models
         }
     }
 
-    
+
+    public class HttpQueryReceiveCodeParameter
+    {
+        public string serial { get; set; }
+        public string receiveCode { get; set; }
+    }
+    public class HttpReceiveResult
+    {
+        public string Code { get; set; }
+        public string Msg { get; set; }
+    }
+
+    public class HttpCheckReceiveCodeParameter
+    {
+        public string serial { get; set; }
+        public string receiveCode { get; set; }
+        /// <summary>
+        /// 签收（1） 拒签（2）
+        /// </summary>
+        public string status { get; set; }
+    }
+
+
 }

@@ -33,6 +33,13 @@ namespace AdminSystem.Infrastructure.Repositories
             return true;
         }
 
+        public async Task<ApplicationUser> GetUserByMobileAsync(string mobile)
+        {
+            var user = await _context.ApplicationUsers.FirstOrDefaultAsync(c=>c.Phone==mobile);
+
+            return user;
+        }
+
         public async Task<bool> UserDeleteAllAsync()
         {
             var list =await _context.ApplicationUsers.ToListAsync();
