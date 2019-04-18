@@ -1,0 +1,191 @@
+[2019-04-18 14:32:44.741 Information]  
+ Hangfire.MySql.Core.MySqlStorage 
+ DB tables already exist. Exit install
+[2019-04-18 14:32:44.863 Information]  
+ Hangfire.BackgroundJobServer 
+ Starting Hangfire Server using job storage: 'Server: 172.16.44.103@JsdOrder'
+[2019-04-18 14:32:44.895 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for SQL Server job storage:
+[2019-04-18 14:32:44.922 Information]  
+ Hangfire.BackgroundJobServer 
+     Queue poll interval: 00:00:15.
+[2019-04-18 14:32:44.928 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+[2019-04-18 14:32:45.786 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:16056:8c06b87f successfully announced in 724.6719 ms
+[2019-04-18 14:32:46.199 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:16056:8c06b87f is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+[2019-04-18 14:32:47.340 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:16056:8c06b87f all the dispatchers started
+[2019-04-18 14:32:47.449 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrating database associated with context "ApplicationDbContext"
+[2019-04-18 14:32:49.071 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrated database associated with context "ApplicationDbContext"
+[2019-04-18 14:36:33.556 Information]  
+ Hangfire.Processing.BackgroundExecution 
+ Execution DelayedJobScheduler recovered from the Faulted state after 00:00:16.0080419 and is in the Running state now
+[2019-04-18 14:46:54.514 Information]  
+ Hangfire.MySql.Core.MySqlStorage 
+ DB tables already exist. Exit install
+[2019-04-18 14:46:54.616 Information]  
+ Hangfire.BackgroundJobServer 
+ Starting Hangfire Server using job storage: 'Server: 172.16.44.103@JsdOrder'
+[2019-04-18 14:46:54.619 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for SQL Server job storage:
+[2019-04-18 14:46:54.621 Information]  
+ Hangfire.BackgroundJobServer 
+     Queue poll interval: 00:00:15.
+[2019-04-18 14:46:54.622 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+[2019-04-18 14:46:55.217 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:27160:0c365df1 successfully announced in 487.0729 ms
+[2019-04-18 14:46:55.237 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:27160:0c365df1 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+[2019-04-18 14:46:55.378 Information]  
+ Hangfire.Server.ServerWatchdog 
+ 1 servers were removed due to timeout
+[2019-04-18 14:46:55.708 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:27160:0c365df1 all the dispatchers started
+[2019-04-18 14:46:56.034 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrating database associated with context "ApplicationDbContext"
+[2019-04-18 14:46:57.457 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrated database associated with context "ApplicationDbContext"
+[2019-04-18 14:47:41.835 Information]  
+ Hangfire.Processing.BackgroundExecution 
+ Execution RecurringJobScheduler recovered from the Faulted state after 00:00:16.0082666 and is in the Running state now
+[2019-04-18 16:03:31.246 Information]  
+ Hangfire.MySql.Core.MySqlStorage 
+ DB tables already exist. Exit install
+[2019-04-18 16:03:31.424 Information]  
+ Hangfire.BackgroundJobServer 
+ Starting Hangfire Server using job storage: 'Server: 172.16.44.103@JsdOrder'
+[2019-04-18 16:03:31.461 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for SQL Server job storage:
+[2019-04-18 16:03:31.468 Information]  
+ Hangfire.BackgroundJobServer 
+     Queue poll interval: 00:00:15.
+[2019-04-18 16:03:31.472 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+[2019-04-18 16:03:32.253 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:14144:be859416 successfully announced in 667.2542 ms
+[2019-04-18 16:03:32.351 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:14144:be859416 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+[2019-04-18 16:03:33.099 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:14144:be859416 all the dispatchers started
+[2019-04-18 16:03:33.374 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrating database associated with context "ApplicationDbContext"
+[2019-04-18 16:03:35.109 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrated database associated with context "ApplicationDbContext"
+[2019-04-18 16:07:34.860 Information]  
+ Hangfire.Processing.BackgroundExecution 
+ Execution RecurringJobScheduler recovered from the Faulted state after 00:00:16.1192291 and is in the Running state now
+[2019-04-18 16:38:41.110 Information]  
+ Hangfire.MySql.Core.MySqlStorage 
+ DB tables already exist. Exit install
+[2019-04-18 16:38:41.194 Information]  
+ Hangfire.BackgroundJobServer 
+ Starting Hangfire Server using job storage: 'Server: 172.16.44.103@JsdOrder'
+[2019-04-18 16:38:41.220 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for SQL Server job storage:
+[2019-04-18 16:38:41.223 Information]  
+ Hangfire.BackgroundJobServer 
+     Queue poll interval: 00:00:15.
+[2019-04-18 16:38:41.225 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+[2019-04-18 16:38:41.954 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:13648:ea4698bb successfully announced in 611.7058 ms
+[2019-04-18 16:38:42.010 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:13648:ea4698bb is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+[2019-04-18 16:38:42.427 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:13648:ea4698bb all the dispatchers started
+[2019-04-18 16:38:42.848 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrating database associated with context "ApplicationDbContext"
+[2019-04-18 16:38:44.284 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrated database associated with context "ApplicationDbContext"
+[2019-04-18 16:39:13.579 Information]  
+ Hangfire.Processing.BackgroundExecution 
+ Execution DelayedJobScheduler recovered from the Faulted state after 00:00:16.0144380 and is in the Running state now
+[2019-04-18 16:41:35.184 Information]  
+ Hangfire.MySql.Core.MySqlStorage 
+ DB tables already exist. Exit install
+[2019-04-18 16:41:35.415 Information]  
+ Hangfire.BackgroundJobServer 
+ Starting Hangfire Server using job storage: 'Server: 172.16.44.103@JsdOrder'
+[2019-04-18 16:41:35.471 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for SQL Server job storage:
+[2019-04-18 16:41:35.637 Information]  
+ Hangfire.BackgroundJobServer 
+     Queue poll interval: 00:00:15.
+[2019-04-18 16:41:35.659 Information]  
+ Hangfire.BackgroundJobServer 
+ Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+[2019-04-18 16:41:36.686 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:21780:b02f4ce0 successfully announced in 867.4413 ms
+[2019-04-18 16:41:36.707 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:21780:b02f4ce0 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+[2019-04-18 16:41:36.813 Information]  
+ Hangfire.Server.ServerWatchdog 
+ 1 servers were removed due to timeout
+[2019-04-18 16:41:37.421 Information]  
+ Hangfire.Server.BackgroundServerProcess 
+ Server c15889421601-1:21780:b02f4ce0 all the dispatchers started
+[2019-04-18 16:41:37.876 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrating database associated with context "ApplicationDbContext"
+[2019-04-18 16:41:39.561 Information]  
+ AdminSystem.Infrastructure.ApplicationDbContext 
+ Migrated database associated with context "ApplicationDbContext"
+[2019-04-18 16:42:23.552 Information]  
+ Hangfire.Processing.BackgroundExecution 
+ Execution RecurringJobScheduler recovered from the Faulted state after 00:00:16.0310846 and is in the Running state now

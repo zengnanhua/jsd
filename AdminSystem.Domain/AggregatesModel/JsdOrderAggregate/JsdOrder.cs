@@ -112,13 +112,14 @@ namespace AdminSystem.Domain.AggregatesModel.JsdOrderAggregate
         /// <param name="deliveryUserId"></param>
         /// <param name="deliveryUserName"></param>
         /// <param name="imeis"></param>
-        public void SignReceive(string mobile,string deliveryUserId,string deliveryUserName,string imeis)
+        public void SignReceive(string mobile,string deliveryUserId,string deliveryUserName,string imeis,string weightCode)
         {
             this.CreateOrderMobile = mobile;
             this.DeliveryUserId = deliveryUserId;
             this.DeliveryUserName = deliveryUserName;
             this.Imeis = imeis;
             this.Status = "3";
+            this.WeightCode = weightCode;
             this.SetIsThisSystemChange(true);
         }
         /// <summary>
@@ -128,13 +129,14 @@ namespace AdminSystem.Domain.AggregatesModel.JsdOrderAggregate
         /// <param name="cancelUserId"></param>
         /// <param name="cancelTureName"></param>
         /// <param name="remark"></param>
-        public void CancelReceive(string mobile, string cancelUserId , string cancelTureName,string remark )
+        public void CancelReceive(string mobile, string cancelUserId , string cancelTureName,string remark ,string weightCode)
         {
             this.CreateOrderMobile = mobile;
             this.CancelUserId = cancelUserId;
             this.CancelTureName = cancelTureName;
             this.Remark = remark;
             this.Status = "2";
+            this.WeightCode = weightCode;
             this.SetIsThisSystemChange(true);
         }
 

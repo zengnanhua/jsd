@@ -58,6 +58,15 @@ namespace AdminSystem.Api
               })
               .AddControllersAsServices();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
             //services.AddMvc()
 
@@ -71,7 +80,7 @@ namespace AdminSystem.Api
             //});
 
 
-           
+
             services.AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -117,9 +126,14 @@ namespace AdminSystem.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CorsPolicy");//允许跨域
+
             app.UseStaticFiles();
             app.UseHangfireServer();//启动Hangfire服务
-            app.UseHangfireDashboard();//启动hangfire面板
+            app.UseHangfireDashboard("/hangfire",new DashboardOptions() {
+                Authorization=new[] { new HangfireAuthorizeFilter()}
+            });//启动hangfire面板
 
             app.UseAuthentication();
 

@@ -39,11 +39,11 @@ namespace AdminSystem.Application.Queries
             }
         }
 
-        public async Task<ResultData<List<GetJsdOrderListPageAsyncDtoResult>>> GetJsdOrderListPageAsync(GetJsdOrderListPageAsyncDtoInput param)
+        public async Task<ResultData<List<GetJsdOrderListPageAsyncDtoResult>>> GetJsdOrderListPageAsync(GetJsdOrderListPageAsyncDtoInput param,string deptCode)
         {
             int page = !string.IsNullOrEmpty(param.Page) ? Convert.ToInt32(param.Page) : 1;
             int pageSize= !string.IsNullOrEmpty(param.PageSize) ? Convert.ToInt32(param.PageSize) : 10;
-            var whereStr = "";
+            var whereStr = $" and z.DeptCode='{deptCode}' ";
             if (!string.IsNullOrWhiteSpace(param.Mobile))
             {
                 whereStr = $"and z.Mobile = '{param.Mobile}'";
@@ -54,7 +54,7 @@ namespace AdminSystem.Application.Queries
                              SELECT id from(
 		                            select z.id from jsdorders z where 1=1 { whereStr }  order by z.oprdate desc  limit {(page-1)*pageSize},{pageSize}
 	                            ) zz  where zz.id =a.Id
-                            )";
+                            ) order by a.lastupdate desc";
             using (var connection = new MySqlConnection(_connectionString))
             {
                 var list = (await connection.QueryAsync<GetJsdOrderListPageAsyncDtoOutput>(sql)).ToList();
@@ -66,6 +66,7 @@ namespace AdminSystem.Application.Queries
                     if (tempHead == null)
                     {
                         tempHead = new GetJsdOrderListPageAsyncDtoResult();
+                        temp.WeightCode = temp.TrueName + "  " + temp.Mobile;
                         temp.Mobile = (temp.Mobile ?? "").toMobileMask();
                         temp.TrueName = (temp.TrueName ?? "").toMemberNameMask();
                         tempHead.Head = temp;

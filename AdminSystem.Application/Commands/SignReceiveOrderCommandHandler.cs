@@ -54,7 +54,7 @@ namespace AdminSystem.Application.Commands
                 return queryResult;
             }
 
-            jsdOrder.SignReceive(request.Mobile,_identityService.GetUserId(),_identityService.GetTrueName(),request.Imeis);
+            jsdOrder.SignReceive(request.Mobile,_identityService.GetUserId(),_identityService.GetTrueName(),request.Imeis,request.ReceiveCode);
 
             //调用签收接口
             var checkResult= await _httpOmsService.CheckReceiveCodeAsync(new Models.HttpCheckReceiveCodeParameter() { serial = jsdOrder.OrderCode, receiveCode = request.ReceiveCode, status = "1" });

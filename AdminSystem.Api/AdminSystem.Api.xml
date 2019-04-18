@@ -64,6 +64,18 @@
             swagger 文档过滤
             </summary>
         </member>
+        <member name="T:AdminSystem.Api.Infrastructure.Filters.HangfireAuthorizeFilter">
+            <summary>
+            hangfire授权
+            </summary>
+        </member>
+        <member name="M:AdminSystem.Api.Infrastructure.Filters.HangfireAuthorizeFilter.Authorize(Hangfire.Dashboard.DashboardContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
         <member name="M:AdminSystem.Api.CustomExtensionsMethods.AddCustomDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             添加数据库

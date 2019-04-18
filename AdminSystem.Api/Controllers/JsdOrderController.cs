@@ -1,6 +1,7 @@
 ﻿using AdminSystem.Application;
 using AdminSystem.Application.Commands;
 using AdminSystem.Application.Queries;
+using AdminSystem.Application.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -19,10 +20,12 @@ namespace AdminSystem.Api.Controllers
     {
         IMediator _mediator;
         IApplicationUserQuery _applicationUserQuery;
-        public JsdOrderController(IMediator mediator, IApplicationUserQuery applicationUserQuery)
+        IIdentityService _identityService;
+        public JsdOrderController(IMediator mediator, IApplicationUserQuery applicationUserQuery, IIdentityService identityService)
         {
             this._mediator = mediator;
             this._applicationUserQuery = applicationUserQuery;
+            this._identityService = identityService;
         }
         /// <summary>
         /// 获取订单列表
@@ -32,7 +35,7 @@ namespace AdminSystem.Api.Controllers
         [HttpPost]
         public async Task<ResultData<List<GetJsdOrderListPageAsyncDtoResult>>> GetJsdOrderListPage(GetJsdOrderListPageAsyncDtoInput param)
         {
-            return await _applicationUserQuery.GetJsdOrderListPageAsync(param);
+            return await _applicationUserQuery.GetJsdOrderListPageAsync(param,_identityService.GetDeptCode());
         }
         /// <summary>
         /// 签收订单

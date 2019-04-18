@@ -27,19 +27,6 @@ namespace AdminSystem.Api.Controllers
             this._logger = logger;
         }
 
-        public string Test()
-        {
-            _logger.LogWarning("这这这这这这这这这这这这这这这这vvv");
-            try
-            {
-                throw new Exception("除数不能为零");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "错误消息");
-            }
-            return "哈哈";
-        }
         /// <summary>
         /// 用户登录
         /// </summary>
