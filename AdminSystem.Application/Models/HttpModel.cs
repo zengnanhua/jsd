@@ -67,6 +67,10 @@ namespace AdminSystem.Application.Models
         /// </summary>
         public string status { get; set; }
     }
-
+    public class HttpSmdModelResult
+    {
+        public object message { get; set; }
+        public string code { get; set; }
+    }
 
 }

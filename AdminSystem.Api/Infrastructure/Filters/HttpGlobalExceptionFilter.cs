@@ -18,17 +18,18 @@ namespace AdminSystem.Api.Infrastructure.Filters
     public class HttpGlobalExceptionFilter : IExceptionFilter
     {
         private readonly IHostingEnvironment env;
-        private readonly ILogger<HttpGlobalExceptionFilter> logger;
+        private readonly ILogger<HttpGlobalExceptionFilter> _logger;
 
         public HttpGlobalExceptionFilter(IHostingEnvironment env, ILogger<HttpGlobalExceptionFilter> logger)
         {
             this.env = env;
-            this.logger = logger;
+            this._logger = logger;
         }
 
         public void OnException(ExceptionContext context)
         {
 
+            _logger.LogError(context.Exception,"请管理员解决");
             //if (env.IsDevelopment())
             if (context.Exception.GetType() == typeof(AdminSystemDomainException))
             {

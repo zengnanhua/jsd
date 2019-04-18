@@ -46,6 +46,7 @@ namespace AdminSystem.Api
 
             services.AddMemoryCache();
 
+
             services
               .AddSystemRegisterType(Configuration)
               .AddCustomSwagger(Configuration)
@@ -119,7 +120,6 @@ namespace AdminSystem.Api
             app.UseStaticFiles();
             app.UseHangfireServer();//启动Hangfire服务
             app.UseHangfireDashboard();//启动hangfire面板
-
 
             app.UseAuthentication();
 
