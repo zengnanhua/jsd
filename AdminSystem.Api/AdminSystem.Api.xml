@@ -18,6 +18,12 @@
             <param name="param"></param>
             <returns></returns>
         </member>
+        <member name="M:AdminSystem.Api.Controllers.AccountController.test">
+            <summary>
+            测试接口
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:AdminSystem.Api.Controllers.HomeController.SynchronizeUser">
             <summary>
             同步用户数据

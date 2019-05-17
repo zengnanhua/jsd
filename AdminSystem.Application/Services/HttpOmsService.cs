@@ -1,6 +1,7 @@
 ﻿using AdminSystem.Application.Models;
 using AdminSystem.Application.Queries;
 using AdminSystem.Infrastructure.Common;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,11 @@ namespace AdminSystem.Application.Services
         readonly string eco_app_token = string.Empty;
         readonly string JsdUpdateOrderUrl = string.Empty;
         readonly string JsdUpdateOrderAppSecret = string.Empty;
-        public HttpOmsService(IRmsDataBaseQuery rmsDataBaseQuery)
+        readonly ILogger<HttpOmsService> _logger;
+        public HttpOmsService(IRmsDataBaseQuery rmsDataBaseQuery, ILogger<HttpOmsService> logger)
         {
             this._rmsDataBaseQuery = rmsDataBaseQuery;
+            this._logger = logger;
 
             this.OMSUrl = _rmsDataBaseQuery.GetZmd_Base_ConfigyValueByKeyCacheAsync("OMSUrl").Result;
             this.ECOUrl = _rmsDataBaseQuery.GetZmd_Base_ConfigyValueByKeyCacheAsync("ECOUrl").Result;
@@ -91,6 +94,83 @@ namespace AdminSystem.Application.Services
 
             return ResultData<string>.CreateResultDataFail(result.Msg);
 
+        }
+
+        /// <summary>
+        /// 极速达取消订单
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public async Task<ResultData<string>> CancelOrder(HttpCancelOrderParameter param)
+        {
+            Dictionary<string, string> dirList = new Dictionary<string, string>();
+            dirList.Add("OrderCode",param.OrderCode);
+            dirList.Add("cancelBy", param.cancelBy);
+
+            dirList.Add("app_id", "jsd");
+            dirList.Add("timestamp", StaticFunction.GetTimestamp(0).ToString() + "000");
+            dirList.Add("ecOrderNumber", param.OrderCode);
+            var str = StaticFunction.GetEcoParamSrc(dirList);
+            var sign = MD5Utils.MD5Encrypt(eco_app_token + str + eco_app_token).ToUpper();
+
+
+            dirList.Add("sign", sign);
+
+            var returnStr = await WebAPIHelper.HttpPostAsync(ECOUrl + "/api/order/cancelOrder", JsonConvert.SerializeObject(dirList));
+            var result = JsonConvert.DeserializeObject<HttpCancelOrderResult>(returnStr);
+            if (result.success)
+            {
+                this._logger.LogInformation("订单号为："+ param.OrderCode+"取消成功");
+                return ResultData<string>.CreateResultDataSuccess("成功");
+            }
+            this._logger.LogWarning("订单号为：" + param.OrderCode + "取消失败，原因："+ (result.errorMsg ?? "调用极速达取消接口失败"));
+            return ResultData<string>.CreateResultDataFail(result.errorMsg ?? "调用极速达取消接口失败");
+        }
+
+        /// <summary>
+        /// 更新订单为已签收
+        /// 曾南华 20190327
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public async Task<ResultData<string>> UpdateOrderSign(HttpUpdateOrderSignParameter param)
+        {
+            var intertfeceUrl = "/orders/web/ecoSync/orders/updateOrderSign";
+            var headurl = JsdUpdateOrderUrl.Trim('/');
+
+            var requestObj = new
+            {
+                appid = "3",
+                order_deliveries = new[]
+                {
+                    new  {
+                        order_no=param.OrderCode,
+                        serial="",
+                        shipping_id="",
+                        shipping_name="",
+                        sign_at=DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"),
+                        status="8"
+                    },
+                },
+                sign = MD5Utils.MD5Encrypt(headurl + intertfeceUrl + JsdUpdateOrderAppSecret)
+            };
+
+
+            var returnStr = await WebAPIHelper.HttpPostAsync(headurl + intertfeceUrl, JsonConvert.SerializeObject(requestObj));
+
+            var result = JsonConvert.DeserializeObject<HttpUpdateOrderSignResult>(returnStr);
+            if (result != null && result.data != null && result.data.state == "1")
+            {
+                _logger.LogInformation($"签收更新订单接口成功 订单号{param.OrderCode}");
+                return ResultData<string>.CreateResultDataSuccess("成功");
+            }
+            if (result != null && result.data != null && (!string.IsNullOrEmpty(result.data.errorMsg)))
+            {
+                _logger.LogWarning($"签收更新订单接口失败 订单号{param.OrderCode} 原因：{result.data.errorMsg}");
+                return ResultData<string>.CreateResultDataFail(result.data.errorMsg);
+            }
+            _logger.LogWarning($"签收更新订单接口失败 订单号{param.OrderCode} ");
+            return ResultData<string>.CreateResultDataFail("调用订单更新为已签收失败");
         }
     } 
 }

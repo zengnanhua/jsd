@@ -5,6 +5,7 @@
 /.vs/
 /UserIdentity/bin/
 /UserIdentity/obj/
+/AdminSystem.Api/log/
 /AdminSystem.Api/bin/
 /AdminSystem.Api/obj/
 /AdminSystem.Domain/bin/

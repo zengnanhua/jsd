@@ -73,4 +73,33 @@ namespace AdminSystem.Application.Models
         public string code { get; set; }
     }
 
+    public class HttpCancelOrderParameter
+    {
+        public string OrderCode { get; set; }
+        public string cancelBy { get; set; }
+    }
+    public class HttpCancelOrderResult
+    {
+        public bool success { get; set; }
+        public string errorCode { get; set; }
+        public string errorMsg { get; set; }
+    }
+    public class HttpUpdateOrderSignParameter
+    {
+        public string OrderCode { get; set; }
+    }
+    public class HttpUpdateOrderSignResult
+    {
+        public string code { get; set; }
+
+        public Data data { get; set; }
+        public class Data
+        {
+            public string sucCode { get; set; }
+            public string state { get; set; }
+            public string sucMsg { get; set; }
+            public string errorMsg { get; set; }
+        }
+    }
+
 }

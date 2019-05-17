@@ -2,6 +2,7 @@
 using AdminSystem.Domain.AggregatesModel.JsdOrderAggregate;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,12 +16,13 @@ namespace AdminSystem.Application.Commands
         private IIdentityService _identityService;
         private IJsdOrderRepository _jsdOrderRepository;
         private HttpOmsService _httpOmsService;
-        public SignReceiveOrderCommandHandler(IIdentityService identityService, IJsdOrderRepository jsdOrderRepository, HttpOmsService httpOmsService)
+        private ILogger<SignReceiveOrderCommandHandler> _logger;
+        public SignReceiveOrderCommandHandler(IIdentityService identityService, IJsdOrderRepository jsdOrderRepository, HttpOmsService httpOmsService, ILogger<SignReceiveOrderCommandHandler> logger)
         {
             this._identityService = identityService;
             this._jsdOrderRepository = jsdOrderRepository;
             this._httpOmsService = httpOmsService;
-
+            this._logger = logger;
         }
         public async Task<ResultData<string>> Handle(SignReceiveOrderCommand request, CancellationToken cancellationToken)
         {
@@ -61,6 +63,16 @@ namespace AdminSystem.Application.Commands
             if (!checkResult.IsSuccess())
             {
                 return checkResult;
+            }
+
+            var UpdateOrderSignResult = await _httpOmsService.UpdateOrderSign(new Models.HttpUpdateOrderSignParameter() { OrderCode = jsdOrder.OrderCode });
+            if (!UpdateOrderSignResult.IsSuccess())
+            {
+                this._logger.LogWarning($"签收更新订单接口失败 订单号：{jsdOrder.OrderCode} 原因：{UpdateOrderSignResult.resultMessage}");
+            }
+            else
+            {
+                this._logger.LogInformation($"签收更新订单接口成功 订单号：{jsdOrder.OrderCode} ");
             }
 
             //更新数据库

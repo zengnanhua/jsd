@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AdminSystem.Application;
 using AdminSystem.Application.Commands;
+using AdminSystem.Application.Services;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +20,13 @@ namespace AdminSystem.Api.Controllers
     public class AccountController : ControllerBase
     {
         IMediator _mediator;
-
+        HttpOmsService _httpOmsService;
         private readonly ILogger<AccountController> _logger = null;
-        public AccountController(IMediator mediator, ILogger<AccountController> logger)
+        public AccountController(IMediator mediator, ILogger<AccountController> logger, HttpOmsService httpOmsService)
         {
             this._mediator = mediator;
             this._logger = logger;
+            this._httpOmsService = httpOmsService;
         }
 
         /// <summary>
@@ -47,5 +49,17 @@ namespace AdminSystem.Api.Controllers
         {
             return await _mediator.Send(param);
         }
+        /// <summary>
+        /// 测试接口
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public  string test()
+        {
+            _logger.LogWarning(new EventId(1), "dfasdfasdf111");
+
+            return "成功";
+        }
+        
     }
 }
